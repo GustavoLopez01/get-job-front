@@ -4,7 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'violet-primary': '#643EE6'
+        'violet-primary': '#643EE6',
+        'violet-secondary': '#6846C3',
+        'violet-tertiary': '#462F9A'
+      },
+      fontFamily: {
+        'RobotoLight': ['RobotoLight'],
+        'RobotoBlack': ['RobotoBlack'],
+        'RobotoBold': ['RobotoBold'],
       }
     },
   },
