@@ -1,5 +1,6 @@
 import { FormEvent } from 'react'
 import Register from '../../assets/images/register.png'
+import { useNavigate } from 'react-router'
 
 type LoginProps = {
     showLogin: boolean
@@ -7,8 +8,11 @@ type LoginProps = {
 
 export const Login = ({ showLogin } : LoginProps) => {
 
+    const navigate = useNavigate()
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        navigate("/dashboard")
     }
 
     return (
@@ -38,7 +42,7 @@ export const Login = ({ showLogin } : LoginProps) => {
 
                             <input 
                                 type="submit"
-                                className="w-3/4 bg-violet-secondary text-white uppercase py-2 font-RobotoBold rounded-[5px]"
+                                className="w-3/4 cursor-pointer bg-violet-secondary text-white uppercase py-2 font-RobotoBold rounded-[5px]"
                                 value="inicia sesión"
                             />
                         </div>
