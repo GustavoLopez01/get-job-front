@@ -1,9 +1,11 @@
-import { FormEvent, useState } from "react"
+import { FormEvent } from "react"
 import Login from "../../assets/images/login.png"
 
-export const Register = () => {
+type RegisterProps = {
+    showLogin: boolean
+}
 
-    const [showImage, setShowImage] = useState(false)
+export const Register = ({ showLogin } : RegisterProps) => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -11,7 +13,7 @@ export const Register = () => {
 
     return (
         <div className="md:w-1/2 w-[400px] h-[550px] bg-violet-secondary rounded-l-2xl rounded-r-[100px]">
-            {!showImage ? (
+            {!showLogin ? (
                 <div className="flex flex-col">
                     <h1 className="text-3xl font-RobotoBold pt-8 text-white text-center">Regístrate</h1>
 

@@ -6,7 +6,8 @@ export default {
       colors: {
         'violet-primary': '#643EE6',
         'violet-secondary': '#6846C3',
-        'violet-tertiary': '#462F9A'
+        'violet-tertiary': '#462F9A',
+        'gray-button': '#D9D9D9'
       },
       fontFamily: {
         'RobotoLight': ['RobotoLight'],

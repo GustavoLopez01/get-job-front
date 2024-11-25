@@ -1,8 +1,11 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
 import Register from '../../assets/images/register.png'
 
-export const Login = () => {
-    const [showImage, setShowImage] = useState(true)
+type LoginProps = {
+    showLogin: boolean
+}
+
+export const Login = ({ showLogin } : LoginProps) => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -10,7 +13,7 @@ export const Login = () => {
 
     return (
         <div className="w-1/2 flex items-center">
-            {!showImage ? (
+            {showLogin ? (
                 <div className='w-full'>
                     <h1 className="font-RobotoBold text-center text-3xl">Inicia sesión</h1>
                     <form onSubmit={handleSubmit} autoComplete="off">
