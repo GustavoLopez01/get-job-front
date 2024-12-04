@@ -1,6 +1,5 @@
 import { 
   Route, 
-  Router, 
   Routes
 } from "react-router";
 import App from "../App";

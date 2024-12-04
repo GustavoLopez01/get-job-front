@@ -1,18 +1,34 @@
-import { FormEvent } from 'react'
-import Register from '../../assets/images/register.png'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { auth } from '../../api/login'
+import Register from '../../assets/images/register.png'
 
 type LoginProps = {
     showLogin: boolean
 }
 
 export const Login = ({ showLogin } : LoginProps) => {
-
     const navigate = useNavigate()
+    const [values, setValues] = useState({
+        email: "",
+        password: ""
+    })
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        navigate("/dashboard")
+        const response = await auth(values.email, values.password)
+
+        if(response.token) {
+            document.cookie = response.token
+            navigate("/dashboard")
+        }
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValues({
+            ...values,
+            [e.target.name] : e.target.value
+        })
     }
 
     return (
@@ -23,12 +39,12 @@ export const Login = ({ showLogin } : LoginProps) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <div className="flex flex-col items-center pt-5 space-y-5">
                             <input
-                                id="name"
-                                name="name"
+                                id="email"
+                                name="email"
                                 type="text"
                                 className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight border-2"
                                 placeholder="Ingresa tu correo electrónico"
-                                onChange={() => {}}
+                                onChange={handleChange}
                             />
 
                             <input
@@ -37,7 +53,7 @@ export const Login = ({ showLogin } : LoginProps) => {
                                 type="text"
                                 className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight border-2"
                                 placeholder="Ingresa tu contraseña"
-                                onChange={() => {}}
+                                onChange={handleChange}
                             />
 
                             <input 

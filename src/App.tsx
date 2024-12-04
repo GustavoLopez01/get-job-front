@@ -1,6 +1,4 @@
-import { Footer } from "./components/Footer"
 import { Container } from "./components/Login/Container"
-import { Navbar } from "./components/Navbar"
 
 function App() {
   return (
