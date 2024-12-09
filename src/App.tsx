@@ -1,4 +1,4 @@
-import { Container } from "./components/Login/Container"
+import { Container } from "./components/Auth/Container"
 
 function App() {
   return (
