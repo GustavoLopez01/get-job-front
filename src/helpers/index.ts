@@ -5,3 +5,8 @@ export const formatCurrency = (currency: number) => {
         style: 'currency'
     }).format(currency)
 }
+
+export const getTokenFromCookie = () => {
+    const token = document.cookie.split("=")
+    return token[1];
+}

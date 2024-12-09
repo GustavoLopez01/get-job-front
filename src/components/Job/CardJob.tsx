@@ -1,11 +1,5 @@
 import { formatCurrency } from "../../helpers"
-
-type Job = {
-    name: string,
-    description: string,
-    salary: number,
-    showSalary: boolean
-}
+import type { Job } from "../../types"
 
 interface CardJobProps {
     job: Job
@@ -15,17 +9,19 @@ export const CardJob = ({ job } : CardJobProps) => {
 
   return (
     <>
-      <div className="w-full flex border-2 shadow-sm py-5 px-4 rounded-md my-4 cursor-pointer">
-        <div className="w-3/4">
+      <div className="w-full flex flex-col border-2 shadow-sm py-5 px-4 rounded-md my-4 cursor-pointer">
+        <div className="w-full">
           <p className="font-RobotoBlack text-xl uppercase"> { job.name } </p>
-          { job.showSalary && (
-            <p> { formatCurrency(job.salary) } </p>
+          { job.showSalary ? (
+            <p className="font-semibold">{ formatCurrency(job.salary) } - Mensual </p>
+          ) : ( 
+            <p className="font-semibold">El salario lo prodrás conocer cuando te contacte el reclutador.</p>  
           )}
-          <p className="text-slate-600"> { job.description } </p>
+          <p className="text-slate-600 pt-2 font-RobotoLight"> { job.description } </p>
         </div>
-        <div className="flex flex-col justify-center gap-3">
-            <button className="bg-purple-600 hover:bg-purple-500 px-3 rounded-md py-2 text-white font-bold">Ver más</button>
-            <button className="bg-slate-600 hover:bg-slate-500 px-3 py-2 rounded-md text-white font-bold">Postularte</button>
+        <div className="flex flex-col justify-center gap-3 my-2">
+            <button className="bg-purple-600 hover:bg-purple-500 uppercase px-3 rounded-md py-2 text-white font-bold">Ver detalles</button>
+            <button className="bg-slate-600 hover:bg-slate-500 uppercase px-3 py-2 rounded-md text-white font-bold">Postularte</button>
         </div>
       </div>
     </>
