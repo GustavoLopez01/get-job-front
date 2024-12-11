@@ -9,7 +9,7 @@ export const CardJob = ({ job } : CardJobProps) => {
 
   return (
     <>
-      <div className="w-full flex flex-col border-2 shadow-sm py-5 px-4 rounded-md my-4 cursor-pointer">
+      <div className="ease-in duration-300 w-full flex flex-col border-2 shadow-sm py-5 px-4 rounded-md my-4 cursor-pointer">
         <div className="w-full">
           <p className="font-RobotoBlack text-xl uppercase"> { job.name } </p>
           { job.showSalary ? (

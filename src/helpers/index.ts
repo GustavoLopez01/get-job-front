@@ -6,7 +6,7 @@ export const formatCurrency = (currency: number) => {
     }).format(currency)
 }
 
-export const getTokenFromCookie = () => {
-    const token = document.cookie.split("=")
-    return token[1];
+export const getCookieByKey = (key: string = "userToken") => {
+    const token = document.cookie.split(";")
+    return token.find((item) => item.includes(key))?.split("=")[1]
 }

@@ -55,9 +55,9 @@ export const Login = ({ showLogin } : LoginProps) => {
                             />
 
                             <input
-                                id="lastName"
-                                name="lastName"
-                                type="text"
+                                id="password"
+                                name="password"
+                                type="password"
                                 className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight border-2"
                                 placeholder="Ingresa tu contraseña"
                                 onChange={handleChange}

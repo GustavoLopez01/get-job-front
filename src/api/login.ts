@@ -3,13 +3,9 @@ import { fetchApi } from "./fetch";
 
 
 export const auth = async (email: string, password: string) => {
-    try {
+    try {        
         return await fetchApi({}, `${BASE_URL}/session/login`, {
             method: "POST",
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({
                 email,
                 password

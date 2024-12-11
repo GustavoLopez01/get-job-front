@@ -14,7 +14,6 @@ export const JobList = () => {
             if(Array.isArray(response)) {
                 setJobs(response)
             }
-            console.log({response});
         } catch (error) {
             console.error(error);
         }
@@ -25,7 +24,7 @@ export const JobList = () => {
     }, [])
 
     return (
-        <div className="md:max-w-5xl mx-auto">
+        <div className="">
             <div className="pt-10">
                 <SearchJob />
                 <div className="grid md:grid-cols-2 grid-cols-1 md:p-2 p-4 gap-4">

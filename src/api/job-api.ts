@@ -1,16 +1,17 @@
 import { BASE_URL } from "../constants";
-import { getTokenFromCookie } from "../helpers";
 import { fetchApi } from "./fetch";
 
 export const getAllJobs = async () => {
     try {
-        return await fetchApi({}, `${BASE_URL}/jobs`, {
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': getTokenFromCookie()
-            },
-        })
+        return await fetchApi({}, `${BASE_URL}/jobs`, {})
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getJobsByUser = async () => {
+    try {
+        return await fetchApi({}, `${BASE_URL}/jobs/get-vacancies`, {})
     } catch (error) {
         console.error(error);
     }
