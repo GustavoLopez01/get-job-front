@@ -7,10 +7,12 @@ export const Navbar = () => {
   return (
     <nav className="w-full h-20 bg-violet-primary text-white flex items-center">
         <div className="grid grid-cols-2 w-full">
-          <p className="font-RobotoBlack text-3xl pl-10">
-              GetJob
-          </p>
-
+          <NavLink
+            to="/dashboard"
+            className="font-RobotoBlack text-3xl pl-10"
+          >
+            GetJob
+          </NavLink>
           <div className="flex justify-end items-center pr-10">
             {
               ROUTES_RECRUITER.map((route, index) => (

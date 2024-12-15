@@ -5,10 +5,10 @@ export default function AddVacancy() {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
     }
-    
+
     return (
         <>
-            <div className="mt-5">
+            <div className="w-full mt-5 px-5">
                 <form >
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col">
