@@ -89,7 +89,7 @@ export default function MyVacancies() {
                     Número total de registros {vacancies?.length}
                 </p>
                 <table className="min-w-full text-center">
-                    <thead className="h-12 font-RobotoBlack">
+                    <thead className="h-12 bg-indigo-500 text-white font-RobotoBlack">
                         <th>No</th>
                         <th>Nombre</th>
                         <th className="md:visible max-[500px]:hidden">Activo</th>
