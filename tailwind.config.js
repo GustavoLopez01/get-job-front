@@ -10,9 +10,9 @@ export default {
         'gray-button': '#D9D9D9'
       },
       fontFamily: {
-        'RobotoLight': ['RobotoLight'],
-        'RobotoBlack': ['RobotoBlack'],
-        'RobotoBold': ['RobotoBold'],
+        'roboto-light': ['RobotoLight'],
+        'roboto-black': ['RobotoBlack'],
+        'roboto-bold': ['RobotoBold'],
       }
     },
   },

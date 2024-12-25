@@ -10,3 +10,5 @@ export type Job = {
     createdAt: string
     updatedAt: string
 }
+
+export type JobToSave = Omit<Job, 'id' | 'createdAt' | 'updatedAt'> 
