@@ -15,7 +15,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
         <div className="md:w-1/2 w-[400px] h-[550px] bg-violet-secondary rounded-l-2xl rounded-r-[100px]">
             {!showLogin ? (
                 <div className="flex flex-col">
-                    <h1 className="text-3xl font-RobotoBold pt-8 text-white text-center">Regístrate</h1>
+                    <h1 className="text-3xl font-roboto-bold pt-8 text-white text-center">Regístrate</h1>
 
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <div className="flex flex-col items-center pt-5 space-y-5">
@@ -23,7 +23,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="name"
                                 name="name"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu nombre (s)"
                                 onChange={() => {}}
                             />
@@ -32,7 +32,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="lastName"
                                 name="lastName"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu apellido (s)"
                                 onChange={() => {}}
                             />
@@ -41,7 +41,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="email"
                                 name="email"
                                 type="email"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu correo electrónico"
                                 onChange={() => {}}
                             />
@@ -51,7 +51,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                     id="age"
                                     name="age"
                                     type="number"
-                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                     placeholder="Edad"
                                     onChange={() => {}}
                                 />
@@ -60,7 +60,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                     id="gender"
                                     name="gender"
                                     type="text"
-                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                     placeholder="Género"
                                     onChange={() => {}}
                                 />
@@ -70,7 +70,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="password"
                                 name="password"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Contraseña"
                                 onChange={() => {}}
                             />
@@ -79,14 +79,14 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Confirma tu contraseña"
                                 onChange={() => {}}
                             />
 
                             <div className="w-3/4">
                                 <input 
-                                    className="bg-violet-tertiary w-full  text-white font-black uppercase py-2 rounded-[5px] font-RobotoBold text-center cursor-pointer" 
+                                    className="bg-violet-tertiary w-full  text-white font-black uppercase py-2 rounded-[5px] font-roboto-bold text-center cursor-pointer" 
                                     value="Registrar"
                                     type="submit"    
                                 />
@@ -97,7 +97,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                 </div>
             ) : (
                 <>
-                    <h2 className="text-center font-RobotoBlack text-white pt-6 px-10 text-xl">Aquí comienza tu carrera profesional</h2>
+                    <h2 className="text-center font-roboto-black text-white pt-6 px-10 text-xl">Aquí comienza tu carrera profesional</h2>
                     <img src={Login} className="w-full" />
                 </>
             )}

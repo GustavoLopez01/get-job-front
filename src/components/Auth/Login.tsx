@@ -42,14 +42,14 @@ export const Login = ({ showLogin } : LoginProps) => {
         <div className="w-1/2 flex items-center">
             {showLogin ? (
                 <div className='w-full'>
-                    <h1 className="font-RobotoBold text-center text-3xl">Inicia sesión</h1>
+                    <h1 className="font-roboto-bold text-center text-3xl">Inicia sesión</h1>
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <div className="flex flex-col items-center pt-5 space-y-5">
                             <input
                                 id="email"
                                 name="email"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight border-2"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 placeholder="Ingresa tu correo electrónico"
                                 onChange={handleChange}
                             />
@@ -58,14 +58,14 @@ export const Login = ({ showLogin } : LoginProps) => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-RobotoLight border-2"
+                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 placeholder="Ingresa tu contraseña"
                                 onChange={handleChange}
                             />
 
                             <button
                                 type="submit"
-                                className="w-3/4 cursor-pointer bg-violet-secondary text-white uppercase py-2 font-RobotoBold rounded-[5px] flex items-center justify-center"
+                                className="w-3/4 cursor-pointer bg-violet-secondary text-white uppercase py-2 font-roboto-bold rounded-[5px] flex items-center justify-center"
                                 >
                                     {!showLoader ? "inicia sesión" : (
                                         <Loader classProps="w-6 h-6" />

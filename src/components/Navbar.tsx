@@ -7,6 +7,7 @@ import {
   PlusCircleIcon,
   ListBulletIcon,
   UserCircleIcon,
+  HomeIcon
 } from '@heroicons/react/24/outline'
 import { ROUTES_RECRUITER } from "../constants"
 
@@ -16,6 +17,8 @@ const getIcon = (icon: string) => {
       return (<PlusCircleIcon className="size-4" />)
     case "my-vacancies":
       return (<ListBulletIcon className="size-4" />)
+    case "home":
+      return (<HomeIcon className="size-4" />)
     default:
       return (<UserCircleIcon className="size-4" />)
   }
@@ -28,7 +31,7 @@ export const Navbar = () => {
       <div className="grid grid-cols-2 w-full relative">
         <NavLink
           to="/dashboard"
-          className="font-RobotoBlack flex items-center text-3xl pl-10"
+          className="font-roboto-black flex items-center text-3xl pl-10"
         >
           GetJob
         </NavLink>
@@ -39,10 +42,10 @@ export const Navbar = () => {
 
         <div className="hidden md:flex justify-end items-center pr-10">
           {
-            ROUTES_RECRUITER.map((route, index) => (
+            ROUTES_RECRUITER.map((route) => (
               <NavLink
-                key={index}
-                className="px-2 hover:underline font-RobotoBold"
+                key={route.value}
+                className="px-2 hover:underline font-roboto-bold"
                 to={`/${route.value}`}>
                 {route.label}
               </NavLink>
@@ -79,7 +82,7 @@ export default function BurguerMenu({
           className="w-52 origin-top-right rounded-xl border border-white/5 bg-violet-primary/95 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
         >
           {ROUTES_RECRUITER.map((route) => (
-            <MenuItem>
+            <MenuItem key={route.value}>
               <NavLink
                 to={route.value}
                 className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
