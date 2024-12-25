@@ -29,7 +29,7 @@ export const JobList = () => {
                 <SearchJob />
                 <div className="grid md:grid-cols-2 grid-cols-1 md:p-2 p-4 gap-4">
                     <div>
-                        <h1 className="font-RobotoBlack text-2xl">Explora los puestos mas recientes</h1>
+                        <h1 className="font-roboto-black text-2xl">Explora los puestos mas recientes</h1>
                         {jobs.map((job) => (
                             <CardJob
                                 key={job.id}
@@ -39,7 +39,7 @@ export const JobList = () => {
                     </div>
 
                     <div>
-                        <h1 className="font-RobotoBlack text-2xl">Tus postulaciones</h1>
+                        <h1 className="font-roboto-black text-2xl">Tus postulaciones</h1>
                         {jobs.map((job, index) => (
                             <CardJob job={job} key={index} />
                         ))}

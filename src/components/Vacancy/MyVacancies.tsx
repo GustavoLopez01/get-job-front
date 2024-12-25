@@ -4,23 +4,22 @@ import type { Job } from "../../types"
 import {
     PencilSquareIcon,
     TrashIcon,
-    ArrowLeftCircleIcon,
-    ArrowRightCircleIcon
 } from "@heroicons/react/24/outline"
 import Modal from "../Modal/Modal"
+import { formatCurrency } from "../../helpers"
 
 export default function MyVacancies() {
     const [vacancies, setVacancies] = useState<Job[]>()
     const [vacancy, setVacancy] = useState<Job>()
     const [numRegisters, setNumRegisters] = useState(0)
-    const [viewSelected, setViewSelected] = useState(1)
+    const [pageSelected, setPageSelected] = useState(1)
+    const [items, setItems] = useState<Number[]>([])
     const [open, setOpen] = useState(false)
+    const [search, setSearch] = useState('')
 
     const getMyVacancies = async () => {
         try {
             const response: Job[] = await getJobsByUser()
-            console.log(response);
-
             if (Array.isArray(response)) {
                 setVacancies(response)
                 setNumRegisters(Math.ceil(response.length / 7))
@@ -47,31 +46,23 @@ export default function MyVacancies() {
     }
 
     const currentVacancies = useMemo(() => {
-        return vacancies?.slice((viewSelected * 7) - 7, (viewSelected * 7))
-    }, [vacancies, viewSelected])
-
-
-    const handleNextPage = () => {
-        try {
-            if (numRegisters <= viewSelected) return
-            setViewSelected((current) => current + 1)
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const handleLastPage = () => {
-        try {
-            if (viewSelected <= 1) return
-            setViewSelected((current) => current - 1)
-        } catch (error) {
-            console.error(error);
-        }
-    }
+        return vacancies?.filter((vacancy) => vacancy.name.includes(search.toLowerCase()))
+        .slice((pageSelected * 7) - 7, (pageSelected * 7))
+    }, [vacancies, pageSelected, search])
 
     useEffect(() => {
         return () => { getMyVacancies() }
     }, [])
+
+    useEffect(() => {
+        if (numRegisters) {
+            let itemsPaginate = []
+            for (let index = 0; index < numRegisters; index++) {
+                itemsPaginate.push(index)
+            }
+            setItems(itemsPaginate)
+        }
+    }, [numRegisters])
 
     return (
         <>
@@ -85,17 +76,29 @@ export default function MyVacancies() {
                 setOpen={setOpen}
             />
             <div className="md:w-full px-5">
-                <p className="m-0 py-5 font-RobotoBlack">
-                    Número total de registros {vacancies?.length}
-                </p>
+                <div className="grid md:grid-cols-2 max-md:gap-2 grid-cols-1 items-center py-5">
+                    <p className="font-roboto-black max-md:w-full max-md:text-center">
+                        Total de registros: {vacancies?.length}
+                    </p>
+                    <div className="flex justify-end items-center">
+                        <input
+                            id="search"
+                            name="search"
+                            className="h-9 min-w-[300px] max-md:w-full rounded-full border-[1px] px-4 outline-none"
+                            placeholder="Buscar..."
+                            onChange={(e) => setSearch(e.target.value || '')}
+                        />
+                    </div>
+                </div>
                 <table className="min-w-full text-center">
-                    <thead className="h-12 bg-indigo-500 text-white font-RobotoBlack">
-                        <th>No</th>
-                        <th>Nombre</th>
-                        <th className="md:visible max-[500px]:hidden">Activo</th>
-                        <th>Salario</th>
-                        <th></th>
-                        <th></th>
+                    <thead className="h-12 uppercase bg-indigo-500 text-white font-roboto-black">
+                        <tr>
+                            <th>Nombre</th>
+                            <th className="md:visible max-[500px]:hidden">Activo</th>
+                            <th>Salario</th>
+                            <th>Fecha de creación</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                         {currentVacancies?.map((vacancy, index) => {
@@ -103,14 +106,15 @@ export default function MyVacancies() {
                             return (
                                 <tr
                                     key={vacancy.id}
-                                    className={`font-RobotoLight h-[80px]
+                                    className={`font-roboto-light h-[80px]
                                 ${showBg ? 'bg-indigo-500 text-white' : 'text-black'}`}>
-                                    <td className="font-RobotoBold">{index + 1}</td>
                                     <td>{vacancy.name}</td>
                                     <td className="md:visible max-[500px]:hidden">{vacancy.active ? 'Si' : 'No'}</td>
-                                    <td>{vacancy.salary}</td>
+                                    <td>{formatCurrency(Number(vacancy.salary))}</td>
+                                    <td>{vacancy.createdAt}</td>
                                     <td>
                                         <button
+                                            className="p-1"
                                             onClick={() => {
                                                 setOpen(true)
                                                 setVacancy(vacancy)
@@ -118,9 +122,9 @@ export default function MyVacancies() {
                                         >
                                             <PencilSquareIcon className="size-6" />
                                         </button>
-                                    </td>
-                                    <td>
+
                                         <button
+                                            className="p-1"
                                             onClick={() => {
                                                 setOpen(true)
                                                 setVacancy(vacancy)
@@ -135,23 +139,20 @@ export default function MyVacancies() {
                     </tbody>
                 </table>
 
-                <div className="flex justify-between gap-5 py-5">
-                    <span className="m-0 min-w-[150px] font-RobotoBlack">
-                        Página actual {viewSelected}
+                <div className="grid grid-cols-2 max-md:grid-cols-1 gap-5 py-5">
+                    <span className="m-0 min-w-[150px] max-md:w-full max-md:text-center font-roboto-black">
+                        Página actual {pageSelected}
                     </span>
-                    <div className="w-full flex justify-end gap-5">
-                        <div className="w-10 h-10 cursor-pointer rounded-full bg-indigo-400">
-                            <ArrowLeftCircleIcon
-                                className={`text-white`}
-                                onClick={handleLastPage}
-                            />
-                        </div>
-                        <div className="w-10 h-10 cursor-pointer rounded-full bg-indigo-400">
-                            <ArrowRightCircleIcon
-                                className={`text-white`}
-                                onClick={handleNextPage}
-                            />
-                        </div>
+                    <div className="w-full flex justify-end max-md:justify-center gap-5">
+                        {items.map((_, index) => (
+                            <button
+                                key={index}
+                                className="py-1 px-3 border-2 rounded-md"
+                                onClick={() => setPageSelected(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
