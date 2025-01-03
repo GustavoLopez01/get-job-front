@@ -14,7 +14,13 @@ export const fetchApi = async (body: object, url: string, extraParams: object) =
         const response = await fetch(url, {
             ...params
         })
-        return response.json()
+
+        const data = await response.json()
+        if(data?.isInvalidToken) {
+            document.cookie = "userToken="
+            window.location.href = import.meta.env.VITE_PATH_INDEX
+        }
+        return data
     } catch (error) {
         console.error(`Ocurred an error -> ${error}`);
 
