@@ -8,8 +8,9 @@ type LoginProps = {
     showLogin: boolean
 }
 
-export const Login = ({ showLogin } : LoginProps) => {
+export const Login = ({ showLogin }: LoginProps) => {
     const navigate = useNavigate()
+
     const [showLoader, setShowLoader] = useState(false)
     const [values, setValues] = useState({
         email: "",
@@ -21,8 +22,9 @@ export const Login = ({ showLogin } : LoginProps) => {
             event.preventDefault()
             setShowLoader(true)
             const response = await auth(values.email, values.password)
-            if(response.token) {
+            if (response.token) {
                 document.cookie = `userToken=${response.token}`
+                sessionStorage.setItem('role', response.role.id)
                 navigate("/dashboard")
             }
             setShowLoader(false)
@@ -34,7 +36,7 @@ export const Login = ({ showLogin } : LoginProps) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({
             ...values,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -66,10 +68,10 @@ export const Login = ({ showLogin } : LoginProps) => {
                             <button
                                 type="submit"
                                 className="w-3/4 cursor-pointer bg-violet-secondary text-white uppercase py-2 font-roboto-bold rounded-[5px] flex items-center justify-center"
-                                >
-                                    {!showLoader ? "inicia sesión" : (
-                                        <Loader classProps="w-6 h-6" />
-                                    )}
+                            >
+                                {!showLoader ? "inicia sesión" : (
+                                    <Loader classProps="w-6 h-6" />
+                                )}
                             </button>
                         </div>
                     </form>
