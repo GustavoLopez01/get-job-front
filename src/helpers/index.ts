@@ -7,6 +7,13 @@ export const formatCurrency = (currency: number) => {
 }
 
 export const getCookieByKey = (key: string = "userToken") => {
-    const token = document.cookie.split(";")
-    return token.find((item) => item.includes(key))?.split("=")[1]
+    const cookies = document.cookie.split(";")
+    return cookies.find((item) => item.includes(key))?.split("=")[1]
 }
+
+export const clearAllCookies = () => {
+    const cookies = document.cookie.split(";")
+    for (const cookie of cookies) {
+        document.cookie = cookie + "=;expires=" + new Date(0).toUTCString();
+    }
+} 

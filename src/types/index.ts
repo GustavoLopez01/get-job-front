@@ -11,4 +11,21 @@ export type Job = {
     updatedAt: string
 }
 
+export type User = {
+    id: number
+    fullName: string
+    email: string
+    password: string
+    userAccount: {
+        gender: string,
+        age: number,
+        isVerified: boolean
+    }
+}
+
 export type JobToSave = Omit<Job, 'id' | 'createdAt' | 'updatedAt'> 
+
+export type Route = {
+    label: string
+    value: string
+}
