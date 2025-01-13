@@ -6,6 +6,16 @@ export const formatCurrency = (currency: number) => {
     }).format(currency)
 }
 
+
+export const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString('es-ES', {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    })
+}
+
 export const getCookieByKey = (key: string = "userToken") => {
     const cookies = document.cookie.split(";")
     return cookies.find((item) => item.includes(key))?.split("=")[1]

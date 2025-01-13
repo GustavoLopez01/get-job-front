@@ -6,7 +6,7 @@ import {
     TrashIcon,
 } from "@heroicons/react/24/outline"
 import Modal from "../Modal/Modal"
-import { formatCurrency } from "../../helpers"
+import { formatCurrency, formatDate } from "../../helpers"
 
 export default function MyVacancies() {
     const [vacancies, setVacancies] = useState<Job[]>()
@@ -19,7 +19,7 @@ export default function MyVacancies() {
 
     const getMyVacancies = async () => {
         try {
-            const response: Job[] = await getJobsByUser()
+            const response: Job[] = await getJobsByUser({})
             if (Array.isArray(response)) {
                 setVacancies(response)
                 setNumRegisters(Math.ceil(response.length / 7))
@@ -47,7 +47,7 @@ export default function MyVacancies() {
 
     const currentVacancies = useMemo(() => {
         return vacancies?.filter((vacancy) => vacancy.name.includes(search.toLowerCase()))
-        .slice((pageSelected * 7) - 7, (pageSelected * 7))
+            .slice((pageSelected * 7) - 7, (pageSelected * 7))
     }, [vacancies, pageSelected, search])
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export default function MyVacancies() {
         <>
             <Modal
                 open={open}
-                title={'¿Estas seguro de eliminar esta vacante?'}
+                title={`¿Estas seguro de eliminar la vacante de "${vacancy?.name}"?`}
                 message={'Al eliminar esta vacante ya no estara disponible.'}
                 titleButtonAccept="Eliminar"
                 titleButtonCancel="Cancelar"
@@ -93,11 +93,11 @@ export default function MyVacancies() {
                 <table className="min-w-full text-center">
                     <thead className="h-12 uppercase bg-indigo-500 text-white font-roboto-black">
                         <tr>
-                            <th>Nombre</th>
-                            <th className="md:visible max-[500px]:hidden">Activo</th>
+                            <th className="rounded-l-lg">Nombre</th>
+                            <th>Estado</th>
                             <th>Salario</th>
                             <th>Fecha de creación</th>
-                            <th></th>
+                            <th className="rounded-r-lg"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,14 +109,18 @@ export default function MyVacancies() {
                                     className={`font-roboto-light h-[80px]
                                 ${showBg ? 'bg-indigo-500 text-white' : 'text-black'}`}>
                                     <td>{vacancy.name}</td>
-                                    <td className="md:visible max-[500px]:hidden">{vacancy.active ? 'Si' : 'No'}</td>
+                                    <td className="md:visible max-[500px]:hidden">
+                                        <span
+                                            className="font-roboto-black ml-2 py-1 px-3 text-white bg-green-500 rounded-full text-sm">
+                                            {vacancy.active ? 'Activo' : 'Inactivo'}
+                                        </span>
+                                    </td>
                                     <td>{formatCurrency(Number(vacancy.salary))}</td>
-                                    <td>{vacancy.createdAt}</td>
+                                    <td>{formatDate(vacancy.createdAt)}</td>
                                     <td>
                                         <button
                                             className="p-1"
                                             onClick={() => {
-                                                setOpen(true)
                                                 setVacancy(vacancy)
                                             }}
                                         >

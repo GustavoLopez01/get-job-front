@@ -1,12 +1,18 @@
 import { getCookieByKey } from "../helpers";
 
 
-export const fetchApi = async (body: object, url: string, extraParams: object) => {
+export const fetchApi = async (
+    body: object, 
+    url: string, 
+    extraParams: object,
+    extraHeaders: object
+) => {
     try {
         const params = {
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': getCookieByKey() || ''
+                'authorization': getCookieByKey() || '',
+                ...extraHeaders
             },
             ...extraParams
         }

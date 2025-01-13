@@ -52,13 +52,47 @@ export default function Profile() {
                         <div className="flex flex-col">
                             <label
                                 className="font-roboto-bold px-1"
-                                htmlFor="fullName"
+                                htmlFor="names"
                             >
-                                Nombre completo
+                                Nombre(s)
                             </label>
                             <input
-                                id="fullName"
-                                name="fullName"
+                                id="names"
+                                name="names"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                placeholder="Nombre completo"
+                                onChange={handleChange}
+                                value={formik.values.fullName}
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label
+                                className="font-roboto-bold px-1"
+                                htmlFor="motherSurname"
+                            >
+                                Apellido materno
+                            </label>
+                            <input
+                                id="motherSurname"
+                                name="motherSurname"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                placeholder="Nombre completo"
+                                onChange={handleChange}
+                                value={formik.values.fullName}
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label
+                                className="font-roboto-bold px-1"
+                                htmlFor="lastName"
+                            >
+                                Apellido paterno
+                            </label>
+                            <input
+                                id="lastName"
+                                name="lastName"
                                 className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
@@ -134,6 +168,44 @@ export default function Profile() {
                                 type="file"
                                 className="file:h-9 file:rounded-full file:px-5 file:outline-none file:border-none file:cursor-pointer"
 
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label
+                                className="font-roboto-bold px-1"
+                                htmlFor="password"
+                            >
+                                Contraseña
+                            </label>
+                            <input
+                                id="password"
+                                name="password"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                placeholder="Edad"
+                                type="password"
+                                min={1}
+                                onChange={handleChange}
+                                value={formik.values.age}
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label
+                                className="font-roboto-bold px-1"
+                                htmlFor="confirmPassword"
+                            >
+                                Edad
+                            </label>
+                            <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                placeholder="Edad"
+                                type="password"
+                                min={1}
+                                onChange={handleChange}
+                                value={formik.values.age}
                             />
                         </div>
 

@@ -1,15 +1,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
-import { Bars3Icon } from '@heroicons/react/24/outline'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import {
-  PlusCircleIcon,
-  ListBulletIcon,
-  UserCircleIcon,
-  HomeIcon,
-  ArrowLeftStartOnRectangleIcon
-} from '@heroicons/react/24/outline'
 import {
   GENERAL_ROUTES,
   ROUTES_RECRUITER,
@@ -17,6 +9,15 @@ import {
 } from '../constants'
 import { clearAllCookies, getCookieByKey } from '../helpers'
 import type { Route } from '../types'
+import { logout } from '../api/login'
+import {
+  PlusCircleIcon,
+  ListBulletIcon,
+  UserCircleIcon,
+  HomeIcon,
+  ArrowLeftStartOnRectangleIcon,
+  Bars3Icon
+} from '@heroicons/react/24/outline'
 
 type BurguerMenuProps = {
   setShowMenu: (showMenu: boolean) => void
@@ -45,14 +46,15 @@ export const Navbar = () => {
 
   const routes = useMemo(() => {
     const roleId = Number(sessionStorage.getItem('role'))
-    if(roleId > 2) return []
+    if (roleId > 2) return []
     if (roleId === 1) {
       return [...GENERAL_ROUTES, ...ROUTES_RECRUITER]
     }
     return [...GENERAL_ROUTES, ...ROUTES_WORKER]
   }, [])
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout()
     clearAllCookies()
     sessionStorage.clear()
     navigate("/")
