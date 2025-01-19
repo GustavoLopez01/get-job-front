@@ -3,9 +3,10 @@ import { getJobsByUser } from '../../api/job-api'
 import type { JobInnerJobRequest } from '../../types'
 import { formatDate } from '../../helpers'
 import ChartJobs from './ChartJobs'
+import { useNavigate } from 'react-router'
 
 export default function JobRequestList() {
-
+    const navigate = useNavigate()
     const [jobRequests, setjobRequests] = useState<JobInnerJobRequest[]>([])
     const [dataChart, setDataChart] = useState<any>([])
 
@@ -20,8 +21,8 @@ export default function JobRequestList() {
                         data: req.jobRequests?.length || 2
                     }
                 })
-                console.log(data);
-                console.log(data.map((dato) => dato.label));
+                // console.log(data);
+                // console.log(data.map((dato) => dato.label));
 
                 setDataChart(data)
             }
@@ -37,38 +38,52 @@ export default function JobRequestList() {
     return (
         <>
             <div className="px-3">
-                <ChartJobs chartData={dataChart} />
-                <section className="flex flex-col">
-                    <h1 className="font-roboto-bold text-2xl py-6 text-center">Tus vacantes</h1>
-                    <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-3 font-roboto-light">
-                        {jobRequests.map((request) => (
-                            <div
-                                key={request.id}
-                                className="p-3 border-[1px] shadow-md rounded-md flex flex-col gap-1"
-                            >
-                                <p className="font-roboto-black text-[20px]"> {request.name} </p>
-                                <p className="font-roboto-bold">
-                                    Usuarios postulados :
-                                    <span className="font-roboto-light"> {request.jobRequests.length}  </span>
-                                </p>
-                                <p className="font-roboto-bold">
-                                    Fecha de creación:
-                                    <span className="pl-1 font-roboto-light">{formatDate(request.createdAt)}</span>
-                                </p>
-                                <p className="font-roboto-bold">Estatus:
-                                    <span
-                                        className="font-roboto-black ml-2 py-1 px-3 text-white bg-green-500 rounded-full text-sm">
-                                        {request.active ? 'Activo' : 'Inactivo'}
-                                    </span>
-                                </p>
-                                <button
-                                    className="transition ease-in w-full my-2 border-2 bg-transparent border-indigo-500 uppercase font-roboto-black text-sm text-indigo-600 py-2 rounded-md hover:bg-indigo-500 hover:text-white">
-                                    Mostrar detalles
-                                </button>
+                {jobRequests.length > 0 ? (
+                    <>
+                        <ChartJobs chartData={dataChart} />
+                        <section className="flex flex-col">
+                            <h1 className="font-roboto-bold text-2xl py-6 text-center">Tus vacantes</h1>
+                            <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-3 font-roboto-light">
+                                {jobRequests.map((request) => (
+                                    <div
+                                        key={request.id}
+                                        className="p-3 border-[1px] shadow-md rounded-md flex flex-col gap-1"
+                                    >
+                                        <p className="font-roboto-black text-[20px]"> {request.name} </p>
+                                        <p className="font-roboto-bold">
+                                            Usuarios postulados :
+                                            <span className="font-roboto-light"> {request.jobRequests.length}  </span>
+                                        </p>
+                                        <p className="font-roboto-bold">
+                                            Fecha de creación:
+                                            <span className="pl-1 font-roboto-light">{formatDate(request.createdAt)}</span>
+                                        </p>
+                                        <p className="font-roboto-bold">Estatus:
+                                            <span
+                                                className="font-roboto-black ml-2 py-1 px-3 text-white bg-green-500 rounded-full text-sm">
+                                                {request.active ? 'Activo' : 'Inactivo'}
+                                            </span>
+                                        </p>
+                                        <button
+                                            className="transition ease-in w-full my-2 border-2 bg-transparent border-indigo-500 uppercase font-roboto-black text-sm text-indigo-600 py-2 rounded-md hover:bg-indigo-500 hover:text-white">
+                                            Mostrar detalles
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </section>
+                    </>
+                ) : (
+                    <div className="text-center">
+                        <h2 className="font-roboto-black text-2xl">Aún no tienes vacantes publicadas</h2>
+                        <button
+                            className="px-4 py-2 mt-5 border-indigo-600 border-[1px] bg-transparent rounded-full text-indigo-600 font-roboto-bold hover:scale-105 ease-in-out duration-100"
+                            onClick={() => navigate('/add-vacancy')}
+                        >
+                            Registrar primera vacante
+                        </button>
                     </div>
-                </section>
+                )}
             </div>
         </>
     )

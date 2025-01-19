@@ -1,14 +1,15 @@
 
 import { useEffect, useMemo, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router'
+import { NavLink, useNavigate, useLocation } from 'react-router'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { useAppDispatch } from '../store/store'
 import {
   GENERAL_ROUTES,
   ROUTES_RECRUITER,
   ROUTES_WORKER
 } from '../constants'
 import { clearAllCookies, getCookieByKey } from '../helpers'
-import type { Route } from '../types'
+import type { DataUser, Route } from '../types'
 import { logout } from '../api/login'
 import {
   PlusCircleIcon,
@@ -18,11 +19,13 @@ import {
   ArrowLeftStartOnRectangleIcon,
   Bars3Icon
 } from '@heroicons/react/24/outline'
+import { getUser } from '../api/user'
+import { setData } from '../store/userSlice'
 
 type BurguerMenuProps = {
-  setShowMenu: (showMenu: boolean) => void
   showMenu: boolean
   routes: Route[]
+  setShowMenu: (showMenu: boolean) => void
   handleLogout: () => void
 }
 
@@ -40,18 +43,18 @@ const getIcon = (icon: string) => {
 }
 
 export const Navbar = () => {
-  const navigate = useNavigate()
-  const token = getCookieByKey()
-  const [showMenu, setShowMenu] = useState(false)
 
-  const routes = useMemo(() => {
-    const roleId = Number(sessionStorage.getItem('role'))
-    if (roleId > 2) return []
-    if (roleId === 1) {
-      return [...GENERAL_ROUTES, ...ROUTES_RECRUITER]
-    }
-    return [...GENERAL_ROUTES, ...ROUTES_WORKER]
-  }, [])
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const token = getCookieByKey()
+
+  const [showMenu, setShowMenu] = useState(false)
+  const [userData, setUserData] = useState<DataUser>({
+      fullName: '',
+      email: '',
+      roleId: 0
+  })
 
   const handleLogout = async () => {
     await logout()
@@ -60,9 +63,42 @@ export const Navbar = () => {
     navigate("/")
   }
 
+  const handleGetDataUser = async () => {
+    try {
+        const response: DataUser = await getUser()
+        if(response.roleId) {
+          const user = {
+            roleId: response.roleId,
+            fullName: response.fullName,
+            email: response.email
+          }
+          dispatch(setData(user))
+          setUserData(user)
+        }
+        console.log({response});
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    if(location.pathname !== '/' && userData.roleId === 0) {
+      handleGetDataUser()
+    }
+  }, [userData.roleId, location.pathname])
+
   useEffect(() => {
     if (!token) navigate("/")
   }, [token])
+
+  const routes = useMemo(() => {
+    const { roleId } = userData
+    if (roleId > 2 || roleId < 1) return []
+    if (roleId === 1) {
+      return [...GENERAL_ROUTES, ...ROUTES_RECRUITER]
+    }
+    return [...GENERAL_ROUTES, ...ROUTES_WORKER]
+  }, [userData.roleId])
 
   return (
     <nav className="w-full h-20 bg-violet-primary text-white flex items-center">

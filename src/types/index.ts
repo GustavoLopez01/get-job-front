@@ -38,10 +38,14 @@ export type User = {
     email: string
     password: string
     userAccount: {
-        gender: string,
-        age: number,
+        gender: string
+        age: number
         isVerified: boolean
     }
+}
+
+export type DataUser = Omit<User, 'userAccount' | 'id' | 'password'> & {
+    roleId: number
 }
 
 export type JobToSave = Omit<Job, 'id' | 'createdAt' | 'updatedAt'> 
