@@ -37,7 +37,7 @@ export default function JobRequestList() {
 
     return (
         <>
-            <div className="px-3">
+            <div className="px-3 pb-10">
                 {jobRequests.length > 0 ? (
                     <>
                         <ChartJobs chartData={dataChart} />
@@ -47,10 +47,14 @@ export default function JobRequestList() {
                                 {jobRequests.map((request) => (
                                     <div
                                         key={request.id}
-                                        className="p-3 border-[1px] shadow-md rounded-md flex flex-col gap-1"
+                                        className="p-3 relative border-[1px] shadow-md rounded-md flex flex-col gap-1"
                                     >
-                                        <p className="font-roboto-black text-[20px]"> {request.name} </p>
-                                        <p className="font-roboto-bold">
+                                        <p
+                                            className="font-roboto-black text-[20px] absolute -left-5 bg-orange-500 text-white px-10"
+                                        >
+                                            {request.name}
+                                        </p>
+                                        <p className="font-roboto-bold mt-10">
                                             Usuarios postulados :
                                             <span className="font-roboto-light"> {request.jobRequests.length}  </span>
                                         </p>
