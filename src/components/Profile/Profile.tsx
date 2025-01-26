@@ -59,7 +59,7 @@ export default function Profile() {
                             <input
                                 id="names"
                                 name="names"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
                                 value={formik.values.fullName}
@@ -76,7 +76,7 @@ export default function Profile() {
                             <input
                                 id="motherSurname"
                                 name="motherSurname"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
                                 value={formik.values.fullName}
@@ -93,7 +93,7 @@ export default function Profile() {
                             <input
                                 id="lastName"
                                 name="lastName"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
                                 value={formik.values.fullName}
@@ -111,7 +111,7 @@ export default function Profile() {
                                 id="email"
                                 name="email"
                                 type="email"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Correo electronico"
                                 onChange={handleChange}
                                 value={formik.values.email}
@@ -128,7 +128,7 @@ export default function Profile() {
                             <input
                                 id="age"
                                 name="age"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Edad"
                                 type="number"
                                 min={1}
@@ -147,7 +147,7 @@ export default function Profile() {
                             <input
                                 id="gender"
                                 name="gender"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Genero"
                                 onChange={handleChange}
                                 value={formik.values.gender}
@@ -166,7 +166,7 @@ export default function Profile() {
                                 id="cv"
                                 name="cv"
                                 type="file"
-                                className="file:h-9 file:rounded-full file:px-5 file:outline-none file:border-none file:cursor-pointer"
+                                className="file:h-9 file:rounded-full file:px-5 file:outline-hidden file:border-none file:cursor-pointer"
 
                             />
                         </div>
@@ -181,7 +181,7 @@ export default function Profile() {
                             <input
                                 id="password"
                                 name="password"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Edad"
                                 type="password"
                                 min={1}
@@ -200,7 +200,7 @@ export default function Profile() {
                             <input
                                 id="confirmPassword"
                                 name="confirmPassword"
-                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-none"
+                                className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden"
                                 placeholder="Edad"
                                 type="password"
                                 min={1}

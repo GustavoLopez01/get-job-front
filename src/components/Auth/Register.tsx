@@ -23,7 +23,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="name"
                                 name="name"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu nombre (s)"
                                 onChange={() => {}}
                             />
@@ -32,7 +32,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="lastName"
                                 name="lastName"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu apellido (s)"
                                 onChange={() => {}}
                             />
@@ -41,7 +41,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="email"
                                 name="email"
                                 type="email"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Ingresa tu correo electrónico"
                                 onChange={() => {}}
                             />
@@ -51,7 +51,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                     id="age"
                                     name="age"
                                     type="number"
-                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                    className="w-[130px] h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                     placeholder="Edad"
                                     onChange={() => {}}
                                 />
@@ -60,7 +60,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                     id="gender"
                                     name="gender"
                                     type="text"
-                                    className="w-[130px] h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                    className="w-[130px] h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                     placeholder="Género"
                                     onChange={() => {}}
                                 />
@@ -70,7 +70,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="password"
                                 name="password"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Contraseña"
                                 onChange={() => {}}
                             />
@@ -79,7 +79,7 @@ export const Register = ({ showLogin } : RegisterProps) => {
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light"
                                 placeholder="Confirma tu contraseña"
                                 onChange={() => {}}
                             />

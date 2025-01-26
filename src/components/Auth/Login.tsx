@@ -51,7 +51,7 @@ export const Login = ({ showLogin }: LoginProps) => {
                                 id="email"
                                 name="email"
                                 type="text"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 placeholder="Ingresa tu correo electrónico"
                                 onChange={handleChange}
                             />
@@ -60,7 +60,7 @@ export const Login = ({ showLogin }: LoginProps) => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                className="w-3/4 h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                                className="w-3/4 h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 placeholder="Ingresa tu contraseña"
                                 onChange={handleChange}
                             />

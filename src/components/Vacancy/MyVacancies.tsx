@@ -84,7 +84,7 @@ export default function MyVacancies() {
                         <input
                             id="search"
                             name="search"
-                            className="h-9 min-w-[300px] max-md:w-full rounded-full border-[1px] px-4 outline-none"
+                            className="h-9 min-w-[300px] max-md:w-full rounded-full border-[1px] px-4 outline-hidden"
                             placeholder="Buscar..."
                             onChange={(e) => setSearch(e.target.value || '')}
                         />
@@ -128,7 +128,7 @@ export default function MyVacancies() {
                                         </button>
 
                                         <button
-                                            className="p-1"
+                                            className="p-1 cursor-pointer"
                                             onClick={() => {
                                                 setOpen(true)
                                                 setVacancy(vacancy)

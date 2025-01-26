@@ -75,7 +75,6 @@ export const Navbar = () => {
           dispatch(setData(user))
           setUserData(user)
         }
-        console.log({response});
     } catch (error) {
       console.error(error);
     }
@@ -165,13 +164,13 @@ export default function BurguerMenu({
         <MenuItems
           transition
           anchor="bottom end"
-          className="w-52 origin-top-right rounded-xl border border-white/5 bg-violet-primary/95 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+          className="w-52 origin-top-right rounded-xl border border-white/5 bg-violet-primary/95 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-hidden data-closed:scale-95 data-closed:opacity-0"
         >
           {routes.map((route) => (
             <MenuItem key={route.value}>
               <NavLink
                 to={route.value}
-                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-focus:bg-white/10">
                 {getIcon(route.value)}
                 {route.label}
               </NavLink>
@@ -179,7 +178,7 @@ export default function BurguerMenu({
           ))}
           <MenuItem>
             <div
-              className="group cursor-pointer flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
+              className="group cursor-pointer flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-focus:bg-white/10"
               onClick={handleLogout}
             >
               <ArrowLeftStartOnRectangleIcon className="size-5" />

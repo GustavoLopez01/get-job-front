@@ -64,7 +64,7 @@ export default function AddVacancy() {
                                 id="name"
                                 name="name"
                                 type="text"
-                                className="w-full h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-[1px]"
+                                className="w-full h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-[1px]"
                                 placeholder="Ejemplo: Desarrollador de software"
                                 onChange={handleChange}
                             />
@@ -72,7 +72,7 @@ export default function AddVacancy() {
                         <div className="flex flex-col">
                             <label>Categoria</label>
                             <select
-                                className="w-full h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                                className="w-full h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 id="category"
                                 name="category"
                                 onChange={handleChange}
@@ -95,7 +95,7 @@ export default function AddVacancy() {
                                 id="salary"
                                 name="salary"
                                 type="number"
-                                className="w-full h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                                className="w-full h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                                 placeholder="Ejemplo: 10000"
                                 onChange={handleChange}
                             />
@@ -135,7 +135,7 @@ export default function AddVacancy() {
                         <textarea
                             id="description"
                             name="description"
-                            className="w-full h-9 rounded-[10px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2 min-h-24 resize-none"
+                            className="w-full h-9 rounded-[10px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2 min-h-24 resize-none"
                             placeholder="Ejemplo: Conocimientos en algun software de control de versiones - Git, GitLab"
                             onChange={handleChange}
                         />

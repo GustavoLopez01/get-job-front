@@ -12,7 +12,7 @@ export default function SearchJob() {
                     name="title"
                     type="text"
                     placeholder="Ejemplo: Desarrollador frontend"
-                    className="w-full h-9 rounded-[8px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                    className="w-full h-9 rounded-[8px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                     />
             </div>
 
@@ -25,7 +25,7 @@ export default function SearchJob() {
                     name="title"
                     type="text"
                     placeholder="Ejemplo: Ciudad de México"
-                    className="w-full h-9 rounded-[8px] outline-none px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
+                    className="w-full h-9 rounded-[8px] outline-hidden px-4 text-black placeholder:text-black text-sm font-roboto-light border-2"
                     />
             </div>
 
