@@ -48,9 +48,24 @@ export type DataUser = Omit<User, 'userAccount' | 'id' | 'password'> & {
     roleId: number
 }
 
-export type JobToSave = Omit<Job, 'id' | 'createdAt' | 'updatedAt'> 
+export type JobToSave = Omit<Job, 'id' | 'createdAt' | 'updatedAt'> & {
+    address: string
+}
 
 export type Route = {
     label: string
     value: string
+}
+
+export type MapStreet = {
+    address: {
+        city: string
+        country_code: string
+        postcode: string
+        road: string
+        state: string
+    }
+    lat: string
+    lon: string
+    display_name: string
 }

@@ -4,7 +4,9 @@ import type { JobInnerJobRequest } from '../../types'
 import { PencilIcon } from '@heroicons/react/24/outline'
 
 type CardJobProps = {
-  job: JobInnerJobRequest
+  job: JobInnerJobRequest,
+  setOpen: (value: boolean) => void
+  setJobData: (data: JobInnerJobRequest) => void
 }
 
 type RowDataProps = {
@@ -12,9 +14,10 @@ type RowDataProps = {
   value: string
 }
 export default function CardJob({
-  job
+  job,
+  setOpen,
+  setJobData
 }: CardJobProps) {
-
   return (
     <>
       <div
@@ -28,7 +31,9 @@ export default function CardJob({
             {job.name}
           </p>
 
-          <button className="absolute right-2 -top-1 p-2 rounded-full bg-orange-500 text-white cursor-pointer">
+          <button
+            className="absolute right-2 -top-1 p-2 rounded-full bg-orange-500 text-white cursor-pointer"
+          >
             <PencilIcon className="size-6" />
           </button>
         </header>
@@ -61,7 +66,12 @@ export default function CardJob({
             </span>
           </p>
           <button
-            className="transition ease-in w-full my-2 border-2 bg-transparent border-indigo-500 uppercase font-roboto-black text-sm text-indigo-600 py-2 rounded-md hover:bg-indigo-500 hover:text-white cursor-pointer">
+            className="transition ease-in w-full my-2 border-2 bg-transparent border-indigo-500 uppercase font-roboto-black text-sm text-indigo-600 py-2 rounded-md hover:bg-indigo-500 hover:text-white cursor-pointer"
+            onClick={() => {
+              setOpen(true)
+              setJobData(job)
+            }}
+          >
             Mostrar detalles
           </button>
         </div>
