@@ -26,4 +26,15 @@ export const clearAllCookies = () => {
     for (const cookie of cookies) {
         document.cookie = cookie + "=;expires=" + new Date(0).toUTCString();
     }
-} 
+}
+
+export const validateFields = (fields: object) => {
+    let isValid = true;
+    for (const [_, value] of Object.entries(fields)) {
+        if (typeof value !== "boolean" && !value) {
+            isValid = false
+            break
+        }
+    }
+    return isValid
+}

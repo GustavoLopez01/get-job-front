@@ -58,3 +58,8 @@ export const BORDER_COLOR = [
     'rgba(153, 102, 255, 1)',
     'rgba(255, 159, 64, 1)',
 ]
+
+export const LAT_LNG = {
+  lat: 19.4350522,
+  lng: -99.1411493,
+}

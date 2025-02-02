@@ -131,7 +131,7 @@ export const Navbar = () => {
               ))
             }
             <button
-              className="px-5 py-2 flex items-center gap-2 bg-indigo-800  rounded-md font-roboto-bold"
+              className="px-5 py-2 flex items-center gap-1 rounded-md font-roboto-bold cursor-pointer"
               onClick={handleLogout}
             >
               <ArrowLeftStartOnRectangleIcon className="size-5" />
