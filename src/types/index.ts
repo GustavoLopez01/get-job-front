@@ -69,3 +69,11 @@ export type MapStreet = {
     lon: string
     display_name: string
 }
+
+export type UserSave = {
+    name: '',
+    lastName: '',
+    roleId: 0,
+    email: '',
+    password: '',
+}

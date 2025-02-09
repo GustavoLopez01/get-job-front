@@ -51,9 +51,9 @@ export const Navbar = () => {
 
   const [showMenu, setShowMenu] = useState(false)
   const [userData, setUserData] = useState<DataUser>({
-      fullName: '',
-      email: '',
-      roleId: 0
+    fullName: '',
+    email: '',
+    roleId: 0
   })
 
   const handleLogout = async () => {
@@ -65,23 +65,23 @@ export const Navbar = () => {
 
   const handleGetDataUser = async () => {
     try {
-        const response: DataUser = await getUser()
-        if(response.roleId) {
-          const user = {
-            roleId: response.roleId,
-            fullName: response.fullName,
-            email: response.email
-          }
-          dispatch(setData(user))
-          setUserData(user)
+      const response: DataUser = await getUser()
+      if (response.roleId) {
+        const user = {
+          roleId: response.roleId,
+          fullName: response.fullName,
+          email: response.email
         }
+        dispatch(setData(user))
+        setUserData(user)
+      }
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    if(location.pathname !== '/' && userData.roleId === 0) {
+    if (location.pathname !== '/' && userData.roleId === 0) {
       handleGetDataUser()
     }
   }, [userData.roleId, location.pathname])
@@ -110,12 +110,14 @@ export const Navbar = () => {
         </NavLink>
 
         <div className="sm:visible md:hidden flex flex-1 justify-end px-10">
-          <BurguerMenu
-            setShowMenu={setShowMenu}
-            showMenu={showMenu}
-            routes={routes}
-            handleLogout={handleLogout}
-          />
+          {token && (
+            <BurguerMenu
+              setShowMenu={setShowMenu}
+              showMenu={showMenu}
+              routes={routes}
+              handleLogout={handleLogout}
+            />
+          )}
         </div>
 
         {token && (
