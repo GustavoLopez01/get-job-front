@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { DataUser } from '../types'
 
-export type UserSessionState = {
-  roleId: number
-  fullName: string
-  email: string
-}
-
-const initialState = {
+export const initialState: DataUser = {
+  id: 0,
+  name: '',
+  lastName: '',
+  email: '',
   roleId: 0,
-  fullName: '',
-  email: ''
-} satisfies UserSessionState as UserSessionState
+  userAccount: {
+    age: 0,
+    gender: '',
+    isVerified: false,
+    verifyToken: ''
+  }
+}
 
 const userSlice = createSlice({
   name: 'userSlice',
