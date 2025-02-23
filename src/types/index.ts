@@ -34,17 +34,26 @@ export type JobInnerJobRequest = {
 
 export type User = {
     id: number
-    fullName: string
+    name: string
+    lastName: string
     email: string
     password: string
+    roleId: number
     userAccount: {
         gender: string
         age: number
         isVerified: boolean
+        verifyToken: string
     }
 }
 
-export type DataUser = Omit<User, 'userAccount' | 'id' | 'password'> & {
+export type UserAccountSave = Omit<User, 'userAccount'> & {
+    gender: string
+    isVerified: boolean
+    age: number
+} 
+
+export type DataUser = Omit<User, 'password'> & {
     roleId: number
 }
 
@@ -76,4 +85,10 @@ export type UserSave = {
     roleId: 0,
     email: '',
     password: '',
+}
+
+
+export type FetchResponse = {
+    message: string
+    success: boolean
 }

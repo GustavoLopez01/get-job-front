@@ -17,7 +17,7 @@ import {
   UserCircleIcon,
   HomeIcon,
   ArrowLeftStartOnRectangleIcon,
-  Bars3Icon
+  Bars3Icon,
 } from '@heroicons/react/24/outline'
 import { getUser } from '../api/user'
 import { setData } from '../store/userSlice'
@@ -51,27 +51,53 @@ export const Navbar = () => {
 
   const [showMenu, setShowMenu] = useState(false)
   const [userData, setUserData] = useState<DataUser>({
-    fullName: '',
+    id: 0,
+    name: '',
+    lastName: '',
     email: '',
-    roleId: 0
+    roleId: 0,
+    userAccount: {
+      gender: '',
+      age: 0,
+      isVerified: false,
+      verifyToken: ''
+    }
   })
 
   const handleLogout = async () => {
     await logout()
     clearAllCookies()
     sessionStorage.clear()
+    localStorage.clear()
     navigate("/")
   }
 
   const handleGetDataUser = async () => {
     try {
       const response: DataUser = await getUser()
+
       if (response.roleId) {
-        const user = {
+        let user: DataUser = {
+          id: response.id,
           roleId: response.roleId,
-          fullName: response.fullName,
-          email: response.email
+          name: response.name,
+          lastName: response.lastName,
+          email: response.email,
+          userAccount: {
+            age: 0,
+            gender: '',
+            isVerified: false,
+            verifyToken: ''
+          }
         }
+
+        if (response.userAccount) {
+          user = {
+            ...user,
+            userAccount: response.userAccount
+          }
+        }
+                
         dispatch(setData(user))
         setUserData(user)
       }
@@ -90,7 +116,7 @@ export const Navbar = () => {
     if (!token) navigate("/")
   }, [token])
 
-  const routes = useMemo(() => {
+  const routes = useMemo(() => {    
     const { roleId } = userData
     if (roleId > 2 || roleId < 1) return []
     if (roleId === 1) {
