@@ -1,6 +1,5 @@
 import {
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState
@@ -19,13 +18,17 @@ import type { MapStreet } from '../../types'
 import 'leaflet/dist/leaflet.css'
 
 type MapProps = {
+  position: typeof LAT_LNG
   setMapStreet: (data: MapStreet) => void
+  setPosition: (data: typeof LAT_LNG) => void
 }
 
-function DraggableMarker({ setMapStreet }: MapProps) {
+function DraggableMarker({ 
+  position,
+  setPosition,
+}: MapProps) {
   const markerRef = useRef(null)
   const [draggable, setDraggable] = useState(true)
-  const [position, setPosition] = useState(LAT_LNG)
 
   const eventHandlers = useMemo(
     () => ({
@@ -41,30 +44,6 @@ function DraggableMarker({ setMapStreet }: MapProps) {
   const toggleDraggable = useCallback(() => {
     setDraggable((d) => !d)
   }, [])
-
-  const handleGetPositionData = async () => {
-    try {
-      const { lat, lng } = position;
-      const URL = import.meta.env.VITE_URL_STREET_MAP;
-      const url = `${URL}${lat}&lon=${lng}`;
-      const response = await fetch(url);
-      const data: MapStreet = await response.json();
-      if (data.address) {
-        setMapStreet({
-          address: data.address,
-          lat: data.lat,
-          lon: data.lon,
-          display_name: data.display_name
-        })
-      }
-    } catch (error) {
-      console.error("Ocurrió un error al obtener la dirección", error);
-    }
-  }
-
-  useEffect(() => {
-    handleGetPositionData()
-  }, [position])
 
   return (
     <Marker
@@ -83,7 +62,11 @@ function DraggableMarker({ setMapStreet }: MapProps) {
   )
 }
 
-export default function MyMap({ setMapStreet }: MapProps) {
+export default function MyMap({ 
+  position,
+  setPosition,
+  setMapStreet
+}: MapProps) {
   return (
     <MapContainer
       center={LAT_LNG}
@@ -95,7 +78,11 @@ export default function MyMap({ setMapStreet }: MapProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <DraggableMarker setMapStreet={setMapStreet} />
+      <DraggableMarker 
+        position={position}
+        setPosition={setPosition}
+        setMapStreet={setMapStreet}   
+      />
     </MapContainer>
   )
 }

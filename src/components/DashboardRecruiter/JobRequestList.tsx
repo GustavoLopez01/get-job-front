@@ -87,7 +87,7 @@ export default function JobRequestList() {
             <section className="flex flex-col">
               <h1 className="font-roboto-bold text-2xl py-6 text-center">Tus vacantes</h1>
               <hr className="border-1 border-dashed" />
-              <div className="w-full mt-5 grid md:grid-cols-3 grid-cols-1 gap-3 font-roboto-light">
+              <div className="w-full mt-5 grid md:grid-cols-3 grid-cols-1 gap-8 font-roboto-light">
                 {jobRequests.map((job) => (
                   <CardJob
                     key={job.id}

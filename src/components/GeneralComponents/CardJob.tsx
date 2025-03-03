@@ -28,7 +28,7 @@ export default function CardJob({
           <p
             className="font-roboto-black text-[20px] absolute -left-8 bg-orange-500 text-white px-10"
           >
-            {job.name}
+            {job.name.length <= 17 ?  job.name : `${job.name.substring(0, 17)}..`} 
           </p>
 
           <button
