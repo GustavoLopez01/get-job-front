@@ -92,3 +92,12 @@ export type FetchResponse = {
     message: string
     success: boolean
 }
+
+export type ResponseData = {
+    success: boolean
+}
+
+export type State = {
+    name: string
+    key: string
+}

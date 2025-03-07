@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
-import { getAllJobs } from '../../api/job-api';
-import type { Job } from '../../types';
-import { formatCurrency, formatDate } from '../../helpers';
+import { useEffect, useMemo, useState } from 'react'
+import { getAllByUser, postJob } from '../../api/job-request'
+import { getAllJobs } from '../../api/job-api'
+import { formatCurrency, formatDate } from '../../helpers'
+import type { FetchResponse, Job, JobRequest, State } from '../../types'
+import { getAllStates } from '../../api/state-api'
 
 const ABILITIES = [
   { name: "React", value: "React", color: "bg-sky-600" },
@@ -12,18 +14,67 @@ const ABILITIES = [
 
 export default function Jobs() {
   const [jobs, setJobs] = useState<Job[]>([])
+  const [requests, setRequests] = useState<JobRequest[]>([])
   const [jobSelected, setJobSelected] = useState<Job>()
+  const [catalogueStates, setCatalogueStates] = useState<State[]>([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [isPostUserInJob, setIsPostUserInJob] = useState(false)
+
+  const handleGetRequestsByUser = async () => {
+    try {
+      const response: JobRequest[] = await getAllByUser()
+      if (Array.isArray(response)) {
+        setRequests(response)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleGetJobs = async () => {
     try {
       const response = await getAllJobs()
       if (Array.isArray(response)) {
         setJobs(response)
-        setJobSelected(response[0])
+        handleSelectJob(response[0])
       }
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const handleGetStates = async () => {
+    try {
+      const response = await getAllStates()
+      if (Array.isArray(response.data)) {
+        setCatalogueStates(response.data)
+      }
+    } catch (error) {
+      console.error(`Ocurrió un error al obtener los estados -> ${error}`);
+    }
+  }
+
+  const handleSelectJob = (job: Job) => {
+    try {
+      if (job.id) {
+        const isPostUserInJob = requests.find((request) => request.jobId === job.id)
+        if (isPostUserInJob?.id) setIsPostUserInJob(true)
+        else setIsPostUserInJob(false)
+        setJobSelected(job)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handlePost = async () => {
+    try {
+      if (jobSelected?.id) {
+        const response: FetchResponse = await postJob(jobSelected.id)
+        if (response.success) handleGetRequestsByUser()
+      }
+    } catch (error) {
+      console.error(`Ocurrió un error al postularte -> ${error}`);
     }
   }
 
@@ -46,8 +97,13 @@ export default function Jobs() {
   }, [currentPage, jobs.length])
 
   useEffect(() => {
-    return () => { handleGetJobs() }
+    handleGetRequestsByUser()
+    handleGetStates()
   }, [])
+
+  useEffect(() => {
+    handleGetJobs()
+  }, [requests.length])
 
   return (
     <>
@@ -74,12 +130,19 @@ export default function Jobs() {
           >
             Ubicación
           </label>
-          <input
-            type="text"
+          <select
             id="ubication"
-            placeholder="Desarrollador front end"
             className="h-9 rounded-full transition ease-in duration-150 border-[1px] px-4 outline-hidden border-slate-600"
-          />
+          >
+            {catalogueStates.map((state) => (
+              <option
+                key={state.key}
+                value={state.key}
+              >
+                {state.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button className="w-full h-12 bg-violet-primary cursor-pointer font-roboto-black rounded-md text-white">
@@ -103,8 +166,8 @@ export default function Jobs() {
               <p className="py-1"> +{ABILITIES.length - 1} tecnologias requeridas </p>
 
               <button
-                className="w-full my-2 py-3 bg-sky-500 text-white font-roboto-bold rounded-full cursor-pointer"
-                onClick={() => setJobSelected(job)}
+                className="w-full font-roboto-bold rounded-full cursor-pointer my-2 py-3 bg-transparent border-2 border-indigo-600 text-indigo-600 duration-300 hover:bg-indigo-500 hover:text-white"
+                onClick={() => handleSelectJob(job)}
               >
                 Ver detalle
               </button>
@@ -172,8 +235,12 @@ export default function Jobs() {
               </p>
             </section>
 
-            <button className="w-full rounded-full text-white uppercase font-roboto-black cursor-pointer bg-violet-500 py-3">
-              Postularte
+            <button
+              className={`w-full rounded-full font-roboto-black py-3 bg-transparent border-2 border-indigo-600 text-indigo-600 duration-300 hover:bg-indigo-500 hover:text-white ${isPostUserInJob ? 'disabled:opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              onClick={handlePost}
+              disabled={isPostUserInJob}
+            >
+              {!isPostUserInJob ? 'Postularme' : 'Ya te haz postulado'}
             </button>
           </div>
         </div>

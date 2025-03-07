@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { getJobsByUser } from '../../api/job-api'
 import ChartJobs from './ChartJobs'
@@ -12,8 +12,9 @@ export default function JobRequestList() {
   const navigate = useNavigate()
   const [jobRequests, setjobRequests] = useState<JobInnerJobRequest[]>([])
   const [dataChart, setDataChart] = useState<any>([])
-  const [open, setOpen] = useState(false)
   const [jobData, setJobData] = useState<JobInnerJobRequest>()
+  const [open, setOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const getJobs = async () => {
     try {
@@ -35,6 +36,24 @@ export default function JobRequestList() {
       console.error(error);
     }
   }
+
+  const buttonsNavigate = useMemo(() => {
+    const buttons = Math.ceil(jobRequests.length / 6)
+    let finalButtons = []
+    for (let index = 0; index < buttons; index++) {
+      finalButtons.push({
+        label: index + 1,
+        value: index + 1,
+      })
+    }
+    return finalButtons
+  }, [jobRequests.length])
+
+  const finalJobs = useMemo(() => {
+    const end = currentPage * 6
+    const start = end - 6
+    return jobRequests.slice(start, end)
+  }, [currentPage, jobRequests.length])
 
   useEffect(() => {
     return () => { getJobs() }
@@ -80,15 +99,16 @@ export default function JobRequestList() {
           </div>
         </div>
       </GeneralModal>
+      
       <div className="px-3 pb-10">
-        {jobRequests.length > 0 ? (
+        {finalJobs.length > 0 ? (
           <>
             <ChartJobs chartData={dataChart} />
             <section className="flex flex-col">
               <h1 className="font-roboto-bold text-2xl py-6 text-center">Tus vacantes</h1>
               <hr className="border-1 border-dashed" />
               <div className="w-full mt-5 grid md:grid-cols-3 grid-cols-1 gap-8 font-roboto-light">
-                {jobRequests.map((job) => (
+                {finalJobs.map((job) => (
                   <CardJob
                     key={job.id}
                     job={job}
@@ -98,6 +118,22 @@ export default function JobRequestList() {
                 ))}
               </div>
             </section>
+
+            <div className="w-full font-roboto-bold flex justify-center gap-2 py-7">
+              {buttonsNavigate.map((btn) => (
+                <button
+                  key={btn.value}
+                  className={
+                    `px-3 py-1 border-2 rounded-md cursor-pointer
+                  ${currentPage === btn.value ? 'bg-slate-200' : 'bg-transparent'}
+                  `
+                  }
+                  onClick={() => setCurrentPage(btn.value)}
+                >
+                  {btn.label}
+                </button>
+              ))}
+            </div>
           </>
         ) : (
           <div className="text-center">
